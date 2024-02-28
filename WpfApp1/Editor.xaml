@@ -1,0 +1,77 @@
+﻿<Window x:Class="WpfApp1.Editor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1" d:DataContext="{d:DesignInstance Type=local:ShowTitles}"
+        mc:Ignorable="d"
+        Title="Редактор" Height="635" Width="1210" WindowStyle="ToolWindow" ResizeMode="NoResize" Loaded="Window_Loaded">
+    <Grid Background="#3d5a80">
+        <StackPanel Orientation="Horizontal">
+            
+            <Grid x:Name="viewer" Width="840" Margin="10" />
+            
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+                <Border Background="#293241" Margin="0 10" CornerRadius="10" Padding="0 0 0 10">
+                    <StackPanel Orientation="Vertical" Width="320">
+                        <TextBlock Margin="10" Foreground="White" Text="Все области" TextAlignment="Left" FontSize="20"/>
+                        <ListBox x:Name="AreasList" Height="90" Margin="5 0" Background="White" HorizontalAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible" VirtualizingPanel.ScrollUnit="Pixel" ItemsSource="{Binding ShowTitles}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <TextBlock Text="{Binding Title}" FontSize="20" Foreground="Black"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <Button x:Name="AddArea" Click="AddArea_Click" Style="{StaticResource MaterialDesignFlatLightButton}" Foreground="#FF00D6FF" Background="#e0fbfc" Cursor="Hand" Margin="15 10 15 0">
+                            <TextBlock Text="Добавить область" FontSize="16" Foreground="#293241"/>
+                        </Button>
+                    </StackPanel>
+                </Border>
+                <Border Padding="0 0 0 10" Background="#293241" CornerRadius="10">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Margin="5" Foreground="White" Text="Имя области" TextAlignment="Left" FontSize="20"/>
+                        <TextBox Margin="5 0" Name="AreaName" FontSize="20" Height="30" Background="White" Cursor="IBeam"/>
+                        <TextBlock Margin="5" Foreground="White" Text="Текст в области" TextAlignment="Left" FontSize="20"/>
+                        <TextBox Margin="5 0 5 10" Name="AreaText" FontSize="20" Height="30" Background="White" Cursor="IBeam"/>
+                        <StackPanel Orientation="Horizontal">                            
+                            <ComboBox Name="fonts" Style="{StaticResource MaterialDesignComboBox}" SelectionChanged="fonts_SelectionChanged" Background="White" FontSize="20" Margin="5 0" Width="100"/>
+                            <ComboBox Name="colours" Style="{StaticResource MaterialDesignComboBox}" SelectionChanged="colours_SelectionChanged" Background="White" FontSize="20" Margin="5 0" Width="100">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Rectangle Fill="{Binding Name}" Width="16" Height="16" Margin="5, 2, 5, 2"/>
+                                            <TextBlock Text="{Binding Name}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <TextBox Text="10" Margin="5 0" Name="fontSize" FontSize="20" Width="100" Background="White" Cursor="IBeam" TextChanged="fontSize_TextChanged"/>
+                        </StackPanel>
+                        <TextBlock Margin="5 10 10 0" Foreground="White" Text="Равнения" TextAlignment="Left" FontSize="20"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Button x:Name="leftAligment" Click="leftAligment_Click" Style="{StaticResource MaterialDesignFlatLightButton}" Foreground="#FF00D6FF" Background="#e0fbfc" Cursor="Hand" Margin="5 0 40 0">
+                                <TextBlock Text="Лево" FontSize="16" Foreground="#293241"/>
+                            </Button>
+                            <Button x:Name="centreAligment" Click="centreAligment_Click" Style="{StaticResource MaterialDesignFlatLightButton}" Foreground="#FF00D6FF" Background="#e0fbfc" Cursor="Hand" Margin="5 0 40 0">
+                                <TextBlock Text="Центр" FontSize="16" Foreground="#293241"/>
+                            </Button>
+                            <Button x:Name="rightAligment" Click="rightAligment_Click" Style="{StaticResource MaterialDesignFlatLightButton}" Foreground="#FF00D6FF" Background="#e0fbfc" Cursor="Hand" Margin="5 0">
+                                <TextBlock Text="Право" FontSize="16" Foreground="#293241"/>
+                            </Button>
+                        </StackPanel>
+                        <Button x:Name="RemoveArea" Click="RemoveArea_Click" Style="{StaticResource MaterialDesignFlatLightButton}" Foreground="#FF00D6FF" Background="Red" Cursor="Hand" Margin="15 30 15 0">
+                            <TextBlock Text="Удалить" FontSize="16" Foreground="#293241"/>
+                        </Button>
+                    </StackPanel>
+                </Border>
+                <Border Margin="0 10" Padding="10" Background="#293241" CornerRadius="10">
+                    <Button x:Name="SaveProject" Click="SaveProject_Click" Style="{StaticResource MaterialDesignFlatLightButton}" Foreground="#FF00D6FF" Background="#e0fbfc" Cursor="Hand" Margin="5 0">
+                        <TextBlock Text="Сохранить проект" FontSize="16" Foreground="#293241"/>
+                    </Button>
+                </Border>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
